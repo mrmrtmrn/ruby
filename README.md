@@ -68,6 +68,15 @@ class User
     # 変更用のメソッドを作る必要がある
     @name = value
   end
+
+  # メモ化のテクニック
+  # WebAPI使ったデータ取得などパフォーマンスに影響を与えるものに関しては
+  # メモ化してしまって対応すれば一度のアクセスで使い回すことができる
+  def twitter_data
+    @twitter_data ||= begin
+      # Twitter APIからデータを取得する処理を書く
+    end
+  end
 end
 ```
 
