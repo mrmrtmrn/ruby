@@ -80,4 +80,56 @@ class User
 end
 ```
 
-- 
+## 継承
+```ruby
+class Product
+  attr_reader :name, :price
+
+  def initialize(name, price)
+    @name = name
+    @price = price
+  end
+
+  # Objectクラスに定義されているto_sメソッドのオーバーライド
+  def to_s
+    "name: #{name}, price: #{price}"
+  end
+end
+```
+```ruby
+# DVDクラスはProductクラスを継承する
+class DVD < Product
+  # nameとpriceはスーパークラスでattr_readerが設定されているので定義不要
+  attr_reader :runnning_time
+
+  # def initialize(name, price, running_time)
+  #   # スーパークラスにも存在している属性
+  #   @name = name
+  #   @price = price
+  #   # DVDクラス独自の属性
+  #   @running_time = running_time
+  # end
+
+  def initialize(name, price, running_time)
+    # initializeメソッドのオーバーライド
+    # ただし、スーパークラスのinitializeと全く同じ内容なのであれば特別定義する必要は無い
+    # ※インスタンス生成時に自動的にスーパークラスのinitializeメソッドが呼び出されるため
+
+    # スーパークラスの同名のメソッドを呼び出す(ここではinitializeメソッド)
+    super(name, price)
+
+    @running_time = running_time
+  end
+
+  # def initialize(name, price)
+  #   # 引数をすべてスーパークラスのメソッドに渡す。super(name, price)と同じ
+  #   super
+  #   # サブクラスで必要な初期化処理を書く
+  # end
+
+  def to_s
+    # superでスーパークラスのto_sメソッドを呼び出す
+    "#{super}, running_time: #{running_time}"
+  end
+end
+```
