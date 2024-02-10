@@ -133,3 +133,52 @@ class DVD < Product
   end
 end
 ```
+
+## モジュール
+
+```ruby
+module Loggable
+
+  # public/privateの制御も可能
+  # product.logみたいな使い方はできなくなる
+  private
+
+  def log
+    # ログ出力用関数
+  end
+
+  def output_file_name
+    # includeしたクラスの関数を扱うことも可能
+    puts "#{logfile}が保存ファイル名です"
+  end
+end
+
+class Product
+  # moduleのinclude
+  # ログ出力の機能を追加しているのでmixin(ミックスイン)と呼ぶ
+  include Loggable
+
+  def title
+    log
+    # do something
+  end
+
+  def logfile
+    "product_log"
+  end
+end
+
+class User
+  # moduleのinclude
+  include Loggable
+
+  def name
+    log
+    # do something
+  end
+
+  def logfile
+    "user_log"
+  end
+end
+```
