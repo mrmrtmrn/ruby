@@ -158,6 +158,9 @@ class Product
   # ログ出力の機能を追加しているのでmixin(ミックスイン)と呼ぶ
   include Loggable
 
+  # extend の場合はmoduleの関数を特異メソッドとして利用できるようになる
+  # extend Loggable
+
   def title
     log
     # do something
